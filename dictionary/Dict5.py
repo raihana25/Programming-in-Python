@@ -8,17 +8,9 @@ board={}
 
 while(True):
     name=input("Enter team name: ")
-    result=input("Enter result(w/l): ")
-    if (name not in board):
-        if(result=="w"):
-            board[name]=[1,0]
-        else:
-            board[name]=[0,1]
-    else:
-        if (result=="w"):
-            board[name][0]+=1
-        else:
-            board[name][1]+=1
+    result=input("Enter wins and losses\n): ")
+    result=[int(input("result: ")) for i in range(0,2) ]
+    board[name]=result
     
     c=input("Add another match? (y/n): ")
     if (c=="n"):
@@ -27,11 +19,18 @@ while(True):
 print("Team\tWin|Lose")
 for i,j in board.items():
     print(i,"\t",j)
-#board={1:[10,1],2:[99,0]}
-#print (max(board))
-#print (min(board))
-'''res=[key for key in board if all(board[tmp]<=board[key] for tmp in board)]
-#print(str(res))'''
+
+w=[]
+l=[]
+teams=list(board.keys())
+winloss=list(board.values())
+for  item in winloss:
+    w.append(item[0])
+    l.append(item[1])
+indexw=w.index(max(w))
+indexl=l.index(max(l))
+print("winner: ",teams[indexw],"\nloser: ", teams[indexl])
+
 
 name=input("Enter team name to check win percentage ")
 print(board[name][0]*100/(board[name][0]+board[name][1]))
